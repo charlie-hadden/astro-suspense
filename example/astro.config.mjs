@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 
 import node from "@astrojs/node";
 import tailwind from "@astrojs/tailwind";
+import suspense from "astro-suspense";
 
 // https://astro.build/config
 export default defineConfig({
@@ -9,5 +10,5 @@ export default defineConfig({
   adapter: node({
     mode: "standalone"
   }),
-  integrations: [tailwind()]
+  integrations: [tailwind(), suspense()]
 });

@@ -6,6 +6,6 @@
   "keywords": [],
   "license": "MIT",
   "scripts": {
-    "dev": "pnpm --filter @localrepo/example dev"
+    "dev": "pnpm run --parallel --recursive dev"
   }
 }

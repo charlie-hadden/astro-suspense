@@ -15,6 +15,7 @@
     "@astrojs/node": "^6.0.3",
     "@astrojs/tailwind": "^5.0.2",
     "astro": "^3.5.3",
+    "astro-suspense": "workspace:^",
     "tailwindcss": "^3.0.24",
     "typescript": "^5.2.2"
   }
