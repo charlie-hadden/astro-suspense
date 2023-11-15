@@ -1,0 +1,21 @@
+---
+import { Suspense } from "astro-suspense/components";
+import MainLayout from "../layouts/MainLayout.astro";
+import SimpleExample from "../components/SimpleExample.astro";
+import { ReactCounter } from "../components/ReactCounter";
+---
+
+<MainLayout title="Client components">
+  <section>
+    <h1 class="text-3xl font-bold">Client components</h1>
+    <p>Client components are correctly hydrated even within suspense boundaries.</p>
+  </section>
+
+  <section>
+    <Suspense>
+      <p slot="fallback">Loading...</p>
+      <SimpleExample delay={1000} />
+      <ReactCounter client:load />
+    </Suspense>
+  </section>
+</MainLayout>

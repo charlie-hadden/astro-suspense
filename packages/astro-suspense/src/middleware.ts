@@ -42,6 +42,7 @@ function transformStream(promises: SuspensePromises, body: ReadableStream<Uint8A
       }
 
       await writer.write(`<template astro-suspense-id="${result.id}">${result.content.replace(/<\/template>/g, "\\x3c/template>")}</template>`);
+      await writer.write(`<script astro-suspense-id="${result.id}">window.astroSuspenseLoad(${result.id})</script>`);
     }
 
     await writer.close();

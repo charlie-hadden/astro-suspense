@@ -18,15 +18,6 @@
             template.remove();
           }
         }
-
-        if (node instanceof HTMLTemplateElement) {
-          const suspense = document.querySelector(`astro-suspense[suspense-id='${node.getAttribute('astro-suspense-id')}']`)
-
-          if (suspense) {
-            suspense.replaceWith(node.content);
-            node.remove();
-          }
-        }
       })
     })
   })
@@ -35,3 +26,16 @@
   // TODO: Need this? Something else for view transitions?
   document.addEventListener('DOMContentLoaded', () => observer.disconnect());
 })();
+
+window.astroSuspenseLoad = (id) => {
+  const script = document.querySelector(`script[astro-suspense-id='${id}']`)
+  const template = document.querySelector(`template[astro-suspense-id='${id}']`)
+  const suspense = document.querySelector(`astro-suspense[suspense-id='${id}']`)
+
+  if (suspense) {
+    suspense.replaceWith(template.content);
+    template.remove();
+  }
+
+  script.remove();
+}
