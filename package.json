@@ -4,5 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "keywords": [],
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "dev": "pnpm --filter @localrepo/example dev"
+  }
 }

@@ -1,0 +1,26 @@
+---
+import SimpleExample from "../components/SimpleExample.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+---
+
+<MainLayout title="Astro Suspense Demo">
+  <section>
+    <h1 class="text-4xl font-bold">astro-suspense</h1>
+    <p>Out of order streaming support for Astro.</p>
+  </section>
+
+  <section>
+    <h2 class="text-2xl font-bold">Simple Demo</h2>
+    <SimpleExample delay={1000} />
+  </section>
+
+  <section>
+    <h2 class="text-2xl font-bold">Other Demos</h2>
+    <ul class="list-disc pl-4">
+      <li><a href="">Nested suspense boundaries</a></li>
+      <li><a href="">View transitions</a></li>
+      <li><a href="">Hydrating client components within suspense boundaries</a></li>
+      <li><a href="">Prerendered pages</a></li>
+    </ul>
+  </section>
+</MainLayout>

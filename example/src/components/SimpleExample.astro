@@ -1,0 +1,11 @@
+---
+import { wait } from "../utils/wait";
+
+export interface Props {
+  delay: number;
+}
+
+await wait(Astro.props.delay);
+---
+
+<p>This is some sample content that was delayed for {Astro.props.delay}ms</p>
