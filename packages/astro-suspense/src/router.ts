@@ -478,8 +478,6 @@ async function transition(
 		// skip this for the moment as it tends to stop fallback animations
 		// document.documentElement.removeAttribute('data-astro-transition');
 		await runScripts();
-		onPageLoad();
-		announce();
 
     if (response.mediaType === "text/astro-suspense-transition-stream") {
       const node = document.createElement("template");
@@ -487,10 +485,15 @@ async function transition(
       for await (const chunk of response.suspenseStream) {
         node.innerHTML = chunk;
         document.body.appendChild(node.content);
+        // HACK: Run twice in case suspense chunks added new scripts
         await runScripts();
-		    onPageLoad();
+        await runScripts();
       }
     }
+
+		onPageLoad();
+		announce();
+
 	}
 }
 

@@ -8,7 +8,7 @@ import MainLayout from "./MainLayout.astro";
 
   <section>
     <h1 class="text-3xl font-bold">View transitions</h1>
-    <p>Nested suspense boundaries are also supported and works even if the nested content is ready first.</p>
+    <p>Support for view transitions is a little hacky, but as a proof of concept this works. It does require changes to Astro's default router though, so it's required to use <code>{"<SuspenseViewTransitions />"}</code> instead of Astro's default <code>{"<ViewTransitions />"}</code>.</p>
   </section>
 
   <section class="border-b space-x-2">
