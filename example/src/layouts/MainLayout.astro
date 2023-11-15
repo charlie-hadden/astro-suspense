@@ -15,6 +15,12 @@ export interface Props {
 	<body class="p-8">
     <div class="max-w-3xl mx-auto space-y-8">
   		<slot />
+
+      {Astro.url.pathname !== "/" && (
+        <section>
+          <a href="/" class="text-blue-600 hover:text-blue-800">Back to index</a>
+        </section>
+      )}
     </div>
 	</body>
 </html>

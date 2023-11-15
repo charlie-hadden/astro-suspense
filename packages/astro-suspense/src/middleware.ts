@@ -4,12 +4,20 @@ import loader from './loader?raw'
 import { SuspensePromises } from "./promises";
 
 export const onRequest = defineMiddleware(async (ctx, next) => {
-  ctx.locals.suspensePromises = new SuspensePromises();
+  // This is quite the hack, but seems to be the most reliable way of determining
+  // if the current request is a prerender/static render. It isn't perfect as we
+  // will also have headers set whilst using the dev server.
+  const firstHeader = ctx.request.headers.keys().next();
+  const isPrerender = typeof firstHeader.value === 'undefined' && firstHeader.done;
+
+  if (!isPrerender) {
+    ctx.locals.suspensePromises = new SuspensePromises();
+  }
 
   const response = await next();
 
   // TODO: Check content type
-  if (!(response instanceof Response) || !(response.body instanceof ReadableStream)) {
+  if (isPrerender || !(response instanceof Response) || !(response.body instanceof ReadableStream)) {
     return response;
   }
 

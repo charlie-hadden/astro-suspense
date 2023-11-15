@@ -9,7 +9,7 @@ export default function createIntegration(): AstroIntegration {
           entrypoint: 'astro-suspense/middleware',
           order: 'post',
         })
-      }
+      },
     },
   }
 }
