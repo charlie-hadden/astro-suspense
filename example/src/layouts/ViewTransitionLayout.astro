@@ -1,10 +1,10 @@
 ---
-import { ViewTransitions } from "astro:transitions";
+import { SuspenseViewTransitions } from "astro-suspense/components";
 import MainLayout from "./MainLayout.astro";
 ---
 
 <MainLayout title="View transitions">
-  <ViewTransitions slot="head" />
+  <SuspenseViewTransitions slot="head" />
 
   <section>
     <h1 class="text-3xl font-bold">View transitions</h1>
@@ -18,5 +18,7 @@ import MainLayout from "./MainLayout.astro";
     <a class:list={["px-2 py-1 rounded-t border border-b-0 hover:bg-slate-200", Astro.url.pathname === "/view-transitions/prerendered" && "bg-slate-300"]} href="/view-transitions/prerendered">Prerendered</a>
   </section>
 
-  <slot />
+  <div class="space-y-8" transition:animate="slide">
+    <slot />
+  </div>
 </MainLayout>

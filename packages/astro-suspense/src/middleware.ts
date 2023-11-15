@@ -16,9 +16,28 @@ export const onRequest = defineMiddleware(async (ctx, next) => {
 
   const response = await next();
 
-  // TODO: Check content type
-  if (isPrerender || !(response instanceof Response) || !(response.body instanceof ReadableStream)) {
+  if (
+    isPrerender ||
+    !(response instanceof Response) ||
+    !(response.body instanceof ReadableStream) ||
+    response.headers.get("content-type") !== "text/html"
+  ) {
     return response;
+  }
+
+  if (ctx.request.headers.get("astro-suspense-transition") === "1") {
+    const stream = transformSuspenseStream(
+      ctx.locals.suspensePromises,
+      await response.text(),
+    );
+
+    return new Response(stream, {
+      ...response,
+      headers: {
+        ...response.headers,
+        "content-type": "text/astro-suspense-transition-stream"
+      }
+    });
   }
 
   const stream = transformStream(ctx.locals.suspensePromises, response.body);
@@ -26,11 +45,16 @@ export const onRequest = defineMiddleware(async (ctx, next) => {
   return new Response(stream, response);
 });
 
-function transformStream(promises: SuspensePromises, body: ReadableStream<Uint8Array>): ReadableStream<string> {
-  const { readable, writable } = new TransformStream<Uint8Array | string, string>();
+function transformStream(
+  promises: SuspensePromises,
+  body: ReadableStream<Uint8Array>,
+): ReadableStream<string> {
+  const { readable, writable } = new TransformStream<string, string>();
 
   (async () => {
-    await body.pipeTo(writable, { preventClose: true });
+    await body
+    .pipeThrough(new TextDecoderStream())
+    .pipeTo(writable, { preventClose: true });
 
     const writer = writable.getWriter();
     let hasOutputLoader = false;
@@ -41,12 +65,46 @@ function transformStream(promises: SuspensePromises, body: ReadableStream<Uint8A
         hasOutputLoader = true;
       }
 
-      await writer.write(`<template astro-suspense-id="${result.id}">${result.content.replace(/<\/template>/g, "\\x3c/template>")}</template>`);
-      await writer.write(`<script astro-suspense-id="${result.id}">window.astroSuspenseLoad(${result.id})</script>`);
+      await writer.write(suspenseChunk(result));
     }
 
     await writer.close();
   })();
 
   return readable;
+}
+
+function transformSuspenseStream(
+  promises: SuspensePromises,
+  body: string,
+): ReadableStream<string> {
+  const { readable, writable } = new TransformStream<string, string>();
+
+  (async () => {
+    const writer = writable.getWriter();
+    let hasOutputLoader = false;
+
+    await writer.write(JSON.stringify(body) + "\n");
+
+    for await (const result of promises.resolvePromises()) {
+      if (!hasOutputLoader) {
+        await writer.write(JSON.stringify(`<script>${loader}</script>`) + "\n");
+        hasOutputLoader = true;
+      }
+
+      await writer.write(JSON.stringify(suspenseChunk(result)) + "\n");
+    }
+
+    await writer.close();
+  })();
+
+  return readable;
+}
+
+function suspenseChunk(result: { id: number, content: string }): string {
+  return `<template astro-suspense-id="${result.id}">${
+    result.content.replace(/<\/template>/g, "\\x3c/template>")
+  }</template><script astro-suspense-id="${
+    result.id
+  }">window.astroSuspenseLoad(${result.id})</script>`;
 }
