@@ -1,0 +1,21 @@
+---
+import { Suspense } from "astro-suspense/components";
+import MainLayout from "../layouts/MainLayout.astro";
+import ErrorExample from "../components/ErrorExample.astro";
+---
+
+<MainLayout title="Prerendered">
+  <section>
+    <h1 class="text-3xl font-bold">astro-suspense</h1>
+    <p>An <code>error</code> slot is supported, to allow for alternative content to be displayed if an error occurs during rendering.</p>
+  </section>
+
+  <section>
+    <h2 class="text-2xl font-bold">Simple Demo</h2>
+    <Suspense>
+      <p slot="fallback">Loading...</p>
+      <p slot="error">(Intentionally) unable to load content.</p>
+      <ErrorExample delay={1000} />
+    </Suspense>
+  </section>
+</MainLayout>

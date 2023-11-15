@@ -1,0 +1,11 @@
+---
+import { wait } from "../utils/wait";
+
+export interface Props {
+  delay: number;
+}
+
+await wait(Astro.props.delay);
+
+throw new Error(`An intentional error after ${Astro.props.delay}ms.`)
+---
