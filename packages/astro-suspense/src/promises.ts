@@ -1,10 +1,10 @@
 export type PromisePair = {
   content: Promise<string>;
   error: () => Promise<string>;
-}
+};
 
 export class SuspensePromises {
-  private lastId = 0
+  private lastId = 0;
   private promises = new Map<number, PromisePair>();
 
   registerPromises(promisePair: PromisePair): number {
@@ -15,10 +15,10 @@ export class SuspensePromises {
     return id;
   }
 
-  async *resolvePromises(): AsyncGenerator<{ id: number, content: string }> {
-    let promises = [...this.promises.entries()]
-      .map(([id, map]) => Object.assign(
-        new Promise<{ id: number, content: string }>((resolve) => {
+  async *resolvePromises(): AsyncGenerator<{ id: number; content: string }> {
+    let promises = [...this.promises.entries()].map(([id, map]) =>
+      Object.assign(
+        new Promise<{ id: number; content: string }>((resolve) => {
           map.content
             .then((content) => resolve({ id, content }))
             .catch((err) => {
@@ -26,8 +26,9 @@ export class SuspensePromises {
               map.error().then((content) => resolve({ id, content }));
             });
         }),
-        { id }
-      ));
+        { id },
+      ),
+    );
 
     while (promises.length > 0) {
       const result = await Promise.race(promises);

@@ -5,29 +5,33 @@ export interface Props {
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{Astro.props.title}</title>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{Astro.props.title}</title>
     <slot name="head" />
-	</head>
-	<body class="p-8">
-    <div class="max-w-3xl mx-auto space-y-8">
-  		<slot />
+  </head>
+  <body class="p-8">
+    <div class="mx-auto max-w-3xl space-y-8">
+      <slot />
 
-      {Astro.url.pathname !== "/" && (
-        <section>
-          <a href="/" class="text-blue-600 hover:text-blue-800">Back to index</a>
-        </section>
-      )}
+      {
+        Astro.url.pathname !== "/" && (
+          <section>
+            <a href="/" class="text-blue-600 hover:text-blue-800">
+              Back to index
+            </a>
+          </section>
+        )
+      }
     </div>
 
     <style is:global>
       .astro-code {
-        @apply p-4 rounded-md;
+        @apply rounded-md p-4;
       }
     </style>
-	</body>
+  </body>
 </html>

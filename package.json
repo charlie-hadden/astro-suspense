@@ -6,6 +6,22 @@
   "keywords": [],
   "license": "MIT",
   "scripts": {
-    "dev": "pnpm run --parallel --recursive dev"
+    "dev": "pnpm run --parallel --recursive dev",
+    "format": "prettier ./**/* --ignore-unknown",
+    "format:fix": "pnpm format --write",
+    "lint": "eslint --max-warnings 0 --ext .js,.jsx,.ts,.tsx,.cjs,.mjs,.astro .",
+    "lint:fix": "pnpm lint --fix"
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.11.0",
+    "@typescript-eslint/parser": "^6.11.0",
+    "eslint": "^8.53.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-astro": "^0.29.1",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-tailwindcss": "^3.13.0",
+    "prettier": "^3.1.0",
+    "prettier-plugin-astro": "^0.12.2",
+    "prettier-plugin-tailwindcss": "^0.5.7"
   }
 }

@@ -6,10 +6,10 @@ export default function createIntegration(): AstroIntegration {
     hooks: {
       "astro:config:setup"({ addMiddleware }) {
         addMiddleware({
-          entrypoint: 'astro-suspense/middleware',
-          order: 'post',
-        })
+          entrypoint: "astro-suspense/middleware",
+          order: "post",
+        });
       },
     },
-  }
+  };
 }

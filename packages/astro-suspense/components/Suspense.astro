@@ -1,14 +1,16 @@
 ---
 const id = Astro.locals.suspensePromises?.registerPromises({
-  content: Astro.slots.render('default'),
-  error: () => Astro.slots.render('error'),
+  content: Astro.slots.render("default"),
+  error: () => Astro.slots.render("error"),
 });
 ---
 
-{typeof id === 'undefined' ? (
-  <slot />
-) : (
-  <astro-suspense suspense-id={id}>
-    <slot name="fallback" />
-  </astro-suspense>
-)}
+{
+  typeof id === "undefined" ? (
+    <slot />
+  ) : (
+    <astro-suspense suspense-id={id}>
+      <slot name="fallback" />
+    </astro-suspense>
+  )
+}

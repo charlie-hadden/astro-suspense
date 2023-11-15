@@ -1,6 +1,6 @@
 import { defineMiddleware } from "astro/middleware";
 // @ts-expect-error Seems that vite handles this within astro
-import loader from './loader?raw'
+import loader from "./loader?raw";
 import { SuspensePromises } from "./promises";
 
 export const onRequest = defineMiddleware(async (ctx, next) => {
@@ -8,7 +8,8 @@ export const onRequest = defineMiddleware(async (ctx, next) => {
   // if the current request is a prerender/static render. It isn't perfect as we
   // will also have headers set whilst using the dev server.
   const firstHeader = ctx.request.headers.keys().next();
-  const isPrerender = typeof firstHeader.value === 'undefined' && firstHeader.done;
+  const isPrerender =
+    typeof firstHeader.value === "undefined" && firstHeader.done;
 
   if (!isPrerender) {
     ctx.locals.suspensePromises = new SuspensePromises();
@@ -35,8 +36,8 @@ export const onRequest = defineMiddleware(async (ctx, next) => {
       ...response,
       headers: {
         ...response.headers,
-        "content-type": "text/astro-suspense-transition-stream"
-      }
+        "content-type": "text/astro-suspense-transition-stream",
+      },
     });
   }
 
@@ -53,8 +54,8 @@ function transformStream(
 
   (async () => {
     await body
-    .pipeThrough(new TextDecoderStream())
-    .pipeTo(writable, { preventClose: true });
+      .pipeThrough(new TextDecoderStream())
+      .pipeTo(writable, { preventClose: true });
 
     const writer = writable.getWriter();
     let hasOutputLoader = false;
@@ -101,10 +102,11 @@ function transformSuspenseStream(
   return readable;
 }
 
-function suspenseChunk(result: { id: number, content: string }): string {
-  return `<template astro-suspense-id="${result.id}">${
-    result.content.replace(/<\/template>/g, "\\x3c/template>")
-  }</template><script astro-suspense-id="${
+function suspenseChunk(result: { id: number; content: string }): string {
+  return `<template astro-suspense-id="${result.id}">${result.content.replace(
+    /<\/template>/g,
+    "\\x3c/template>",
+  )}</template><script astro-suspense-id="${
     result.id
   }">window.astroSuspenseLoad(${result.id})</script>`;
 }
