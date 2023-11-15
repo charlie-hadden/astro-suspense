@@ -1,0 +1,16 @@
+---
+import { Suspense } from "astro-suspense/components";
+import ViewTransitionLayout from "../../layouts/ViewTransitionLayout.astro";
+import SimpleExample from "../../components/SimpleExample.astro";
+import { ReactCounter } from "../../components/ReactCounter";
+---
+
+<ViewTransitionLayout>
+  <section>
+    <Suspense>
+      <p slot="fallback">Loading...</p>
+      <SimpleExample delay={1000} />
+      <ReactCounter client:load />
+    </Suspense>
+  </section>
+</ViewTransitionLayout>

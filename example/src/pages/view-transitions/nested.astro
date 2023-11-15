@@ -1,0 +1,24 @@
+---
+import { Suspense } from "astro-suspense/components";
+import ViewTransitionLayout from "../../layouts/ViewTransitionLayout.astro";
+import SimpleExample from "../../components/SimpleExample.astro";
+---
+
+<ViewTransitionLayout>
+  <section>
+    <Suspense>
+      <p slot="fallback">Loading...</p>
+      <SimpleExample delay={1000} />
+
+      <Suspense>
+        <p slot="fallback">Loading nested 1...</p>
+        <SimpleExample delay={2000} />
+      </Suspense>
+
+      <Suspense>
+        <p slot="fallback">Loading nested 2...</p>
+        <SimpleExample delay={750} />
+      </Suspense>
+    </Suspense>
+  </section>
+</ViewTransitionLayout>

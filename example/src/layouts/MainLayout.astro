@@ -11,6 +11,7 @@ export interface Props {
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{Astro.props.title}</title>
+    <slot name="head" />
 	</head>
 	<body class="p-8">
     <div class="max-w-3xl mx-auto space-y-8">

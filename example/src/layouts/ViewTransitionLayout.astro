@@ -1,0 +1,22 @@
+---
+import { ViewTransitions } from "astro:transitions";
+import MainLayout from "./MainLayout.astro";
+---
+
+<MainLayout title="View transitions">
+  <ViewTransitions slot="head" />
+
+  <section>
+    <h1 class="text-3xl font-bold">View transitions</h1>
+    <p>Nested suspense boundaries are also supported and works even if the nested content is ready first.</p>
+  </section>
+
+  <section class="border-b space-x-2">
+    <a class:list={["px-2 py-1 rounded-t border border-b-0 hover:bg-slate-200", Astro.url.pathname === "/view-transitions" && "bg-slate-300"]} href="/view-transitions">Simple</a>
+    <a class:list={["px-2 py-1 rounded-t border border-b-0 hover:bg-slate-200", Astro.url.pathname === "/view-transitions/nested" && "bg-slate-300"]} href="/view-transitions/nested">Nested</a>
+    <a class:list={["px-2 py-1 rounded-t border border-b-0 hover:bg-slate-200", Astro.url.pathname === "/view-transitions/client-components" && "bg-slate-300"]} href="/view-transitions/client-components">Client components</a>
+    <a class:list={["px-2 py-1 rounded-t border border-b-0 hover:bg-slate-200", Astro.url.pathname === "/view-transitions/prerendered" && "bg-slate-300"]} href="/view-transitions/prerendered">Prerendered</a>
+  </section>
+
+  <slot />
+</MainLayout>
