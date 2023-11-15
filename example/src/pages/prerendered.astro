@@ -6,14 +6,13 @@ import SimpleExample from "../components/SimpleExample.astro";
 export const prerender = true;
 ---
 
-<MainLayout title="Prerendered">
+<MainLayout title="Prerendered pages">
   <section>
-    <h1 class="text-3xl font-bold">astro-suspense</h1>
+    <h1 class="text-3xl font-bold">Prerendered pages</h1>
     <p>This page is prerendered. Because of this, any suspense content is treated as though the suspense boundary is not there. Fallback states are ignored and the content is inline in the HTML.</p>
   </section>
 
   <section>
-    <h2 class="text-2xl font-bold">Simple Demo</h2>
     <Suspense>
       <p slot="fallback">Loading...</p>
       <SimpleExample delay={1000} />

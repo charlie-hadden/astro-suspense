@@ -1,0 +1,29 @@
+---
+import { Suspense } from "astro-suspense/components";
+import MainLayout from "../layouts/MainLayout.astro";
+import SimpleExample from "../components/SimpleExample.astro";
+---
+
+<MainLayout title="Nested suspense boundaries">
+  <section>
+    <h1 class="text-3xl font-bold">Nested suspense boundaries</h1>
+    <p>Nested suspense boundaries are also supported and works even if the nested content is ready first.</p>
+  </section>
+
+  <section>
+    <Suspense>
+      <p slot="fallback">Loading...</p>
+      <SimpleExample delay={1000} />
+
+      <Suspense>
+        <p slot="fallback">Loading nested 1...</p>
+        <SimpleExample delay={2000} />
+      </Suspense>
+
+      <Suspense>
+        <p slot="fallback">Loading nested 2...</p>
+        <SimpleExample delay={750} />
+      </Suspense>
+    </Suspense>
+  </section>
+</MainLayout>
