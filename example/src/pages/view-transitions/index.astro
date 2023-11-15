@@ -2,6 +2,7 @@
 import { Suspense } from "astro-suspense/components";
 import ViewTransitionLayout from "../../layouts/ViewTransitionLayout.astro";
 import SimpleExample from "../../components/SimpleExample.astro";
+import { Code } from "astro:components";
 ---
 
 <ViewTransitionLayout>
@@ -10,5 +11,16 @@ import SimpleExample from "../../components/SimpleExample.astro";
       <p slot="fallback">Loading...</p>
       <SimpleExample delay={1000} />
     </Suspense>
+  </section>
+
+  <section>
+    <Code
+      theme="dark-plus"
+      code={`<Suspense>
+  <p slot="fallback">Loading...</p>
+  <SimpleExample delay={1000} />
+</Suspense>`}
+      lang="astro"
+    />
   </section>
 </ViewTransitionLayout>

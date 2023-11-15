@@ -2,6 +2,7 @@
 import { Suspense } from "astro-suspense/components";
 import SimpleExample from "../components/SimpleExample.astro";
 import MainLayout from "../layouts/MainLayout.astro";
+import { Code } from "astro:components";
 ---
 
 <MainLayout title="Astro Suspense Demo">
@@ -16,6 +17,17 @@ import MainLayout from "../layouts/MainLayout.astro";
       <p slot="fallback">Loading...</p>
       <SimpleExample delay={1000} />
     </Suspense>
+  </section>
+
+  <section>
+    <Code
+      theme="dark-plus"
+      code={`<Suspense>
+  <p slot="fallback">Loading...</p>
+  <SimpleExample delay={1000} />
+</Suspense>`}
+      lang="astro"
+    />
   </section>
 
   <section>

@@ -2,6 +2,7 @@
 import { Suspense } from "astro-suspense/components";
 import MainLayout from "../layouts/MainLayout.astro";
 import ErrorExample from "../components/ErrorExample.astro";
+import { Code } from "astro:components";
 ---
 
 <MainLayout title="Errors">
@@ -16,5 +17,17 @@ import ErrorExample from "../components/ErrorExample.astro";
       <p slot="error">(Intentionally) unable to load content.</p>
       <ErrorExample delay={1000} />
     </Suspense>
+  </section>
+
+  <section>
+    <Code
+      theme="dark-plus"
+      code={`<Suspense>
+  <p slot="fallback">Loading...</p>
+  <p slot="error">(Intentionally) unable to load content.</p>
+  <ErrorExample delay={1000} />
+</Suspense>`}
+      lang="astro"
+    />
   </section>
 </MainLayout>

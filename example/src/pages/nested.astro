@@ -2,6 +2,7 @@
 import { Suspense } from "astro-suspense/components";
 import MainLayout from "../layouts/MainLayout.astro";
 import SimpleExample from "../components/SimpleExample.astro";
+import { Code } from "astro:components";
 ---
 
 <MainLayout title="Nested suspense boundaries">
@@ -25,5 +26,26 @@ import SimpleExample from "../components/SimpleExample.astro";
         <SimpleExample delay={750} />
       </Suspense>
     </Suspense>
+  </section>
+
+  <section>
+    <Code
+      theme="dark-plus"
+      code={`<Suspense>
+  <p slot="fallback">Loading...</p>
+  <SimpleExample delay={1000} />
+
+  <Suspense>
+    <p slot="fallback">Loading nested 1...</p>
+    <SimpleExample delay={2000} />
+  </Suspense>
+
+  <Suspense>
+    <p slot="fallback">Loading nested 2...</p>
+    <SimpleExample delay={750} />
+  </Suspense>
+</Suspense>`}
+      lang="astro"
+    />
   </section>
 </MainLayout>
