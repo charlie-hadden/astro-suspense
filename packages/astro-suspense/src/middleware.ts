@@ -53,7 +53,7 @@ function transformStream(
   const { readable, writable } = new TransformStream<string, string>();
 
   (async () => {
-    body
+    await body
       .pipeThrough(new TextDecoderStream())
       .pipeTo(writable, { preventClose: true });
 
@@ -62,11 +62,11 @@ function transformStream(
 
     for await (const result of promises.resolvePromises()) {
       if (!hasOutputLoader) {
-        writer.write(`<script>${loader}</script>`);
+        await writer.write(`<script>${loader}</script>`);
         hasOutputLoader = true;
       }
 
-      writer.write(suspenseChunk(result));
+      await writer.write(suspenseChunk(result));
     }
 
     await writer.close();
@@ -85,15 +85,15 @@ function transformSuspenseStream(
     const writer = writable.getWriter();
     let hasOutputLoader = false;
 
-    writer.write(JSON.stringify(body) + "\n");
+    await writer.write(JSON.stringify(body) + "\n");
 
     for await (const result of promises.resolvePromises()) {
       if (!hasOutputLoader) {
-        writer.write(JSON.stringify(`<script>${loader}</script>`) + "\n");
+        await writer.write(JSON.stringify(`<script>${loader}</script>`) + "\n");
         hasOutputLoader = true;
       }
 
-      writer.write(JSON.stringify(suspenseChunk(result)) + "\n");
+      await writer.write(JSON.stringify(suspenseChunk(result)) + "\n");
     }
 
     await writer.close();
