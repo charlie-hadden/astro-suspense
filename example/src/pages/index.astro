@@ -15,7 +15,7 @@ import { Code } from "astro:components";
     <h2 class="text-2xl font-bold">Simple Demo</h2>
     <Suspense>
       <p slot="fallback">Loading...</p>
-      <SimpleExample delay={1000} />
+      <SimpleExample delay={2000} />
     </Suspense>
   </section>
 
@@ -24,7 +24,7 @@ import { Code } from "astro:components";
       theme="dark-plus"
       code={`<Suspense>
   <p slot="fallback">Loading...</p>
-  <SimpleExample delay={1000} />
+  <SimpleExample delay={2000} />
 </Suspense>`}
       lang="astro"
     />

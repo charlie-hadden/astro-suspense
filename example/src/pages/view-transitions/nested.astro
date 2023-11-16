@@ -9,16 +9,16 @@ import { Code } from "astro:components";
   <section>
     <Suspense>
       <p slot="fallback">Loading...</p>
-      <SimpleExample delay={1000} />
+      <SimpleExample delay={3000} />
 
       <Suspense>
         <p slot="fallback">Loading nested 1...</p>
-        <SimpleExample delay={2000} />
+        <SimpleExample delay={5000} />
       </Suspense>
 
       <Suspense>
         <p slot="fallback">Loading nested 2...</p>
-        <SimpleExample delay={750} />
+        <SimpleExample delay={2000} />
       </Suspense>
     </Suspense>
   </section>
@@ -28,16 +28,16 @@ import { Code } from "astro:components";
       theme="dark-plus"
       code={`<Suspense>
   <p slot="fallback">Loading...</p>
-  <SimpleExample delay={1000} />
+  <SimpleExample delay={3000} />
 
   <Suspense>
     <p slot="fallback">Loading nested 1...</p>
-    <SimpleExample delay={2000} />
+    <SimpleExample delay={5000} />
   </Suspense>
 
   <Suspense>
     <p slot="fallback">Loading nested 2...</p>
-    <SimpleExample delay={750} />
+    <SimpleExample delay={2000} />
   </Suspense>
 </Suspense>`}
       lang="astro"
