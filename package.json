@@ -11,9 +11,11 @@
     "format": "prettier ./**/* --ignore-unknown",
     "format:fix": "pnpm format --write",
     "lint": "eslint --max-warnings 0 --ext .js,.jsx,.ts,.tsx,.cjs,.mjs,.astro .",
-    "lint:fix": "pnpm lint --fix"
+    "lint:fix": "pnpm lint --fix",
+    "release": "pnpm run build && pnpm changeset publish"
   },
   "dependencies": {
+    "@changesets/cli": "^2.26.2",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
     "@typescript-eslint/parser": "^6.11.0",
     "eslint": "^8.53.0",
