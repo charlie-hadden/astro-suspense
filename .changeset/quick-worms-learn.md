@@ -2,4 +2,4 @@
 "astro-suspense": patch
 ---
 
-Add an initial readme.
+Add package keywords.
