@@ -19,7 +19,7 @@ npx astro add astro-suspense
 ```astro
 ---
 import { Suspense } from "astro-suspense/components";
-import SlowComponent from "./SlowComponent";
+import SlowComponent from "./SlowComponent.astro";
 ---
 
 <Suspense>
