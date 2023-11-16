@@ -92,9 +92,9 @@ const { fallback = "animate", handleForms } = Astro.props;
 {handleForms ? <meta name="astro-view-transitions-forms" content="true" /> : ""}
 <script>
   import type { Options } from "astro:transitions/client";
-  import { supportsViewTransitions, navigate } from "../src/router";
+  import { supportsViewTransitions, navigate } from "../dist/router";
   // NOTE: import from `astro/prefetch` as `astro:prefetch` requires the `prefetch` config to be enabled
-  import { init } from "../src/prefetch";
+  import { init } from "../dist/prefetch";
 
   export type Fallback = "none" | "animate" | "swap";
 
