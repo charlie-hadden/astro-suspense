@@ -6,6 +6,7 @@
   "keywords": [],
   "license": "MIT",
   "scripts": {
+    "build": "pnpm run --filter astro-suspense build && pnpm run --filter @localrepo/example build",
     "dev": "pnpm run --parallel --recursive dev",
     "format": "prettier ./**/* --ignore-unknown",
     "format:fix": "pnpm format --write",
