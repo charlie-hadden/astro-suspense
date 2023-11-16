@@ -1,0 +1,10 @@
+---
+import "highlight.js/styles/atom-one-dark.min.css";
+import { highlight } from '../utils/highlight';
+
+export interface Props {
+  code: string;
+}
+---
+
+<pre><code class="hljs rounded-md" set:html={highlight(Astro.props.code)} /></pre>

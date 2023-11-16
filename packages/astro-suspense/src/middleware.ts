@@ -49,7 +49,7 @@ export const onRequest = defineMiddleware(async (ctx, next) => {
 function transformStream(
   promises: SuspensePromises,
   body: ReadableStream<Uint8Array>,
-): ReadableStream<string> {
+): ReadableStream<Uint8Array> {
   const { readable, writable } = new TransformStream<string, string>();
 
   (async () => {
@@ -72,13 +72,13 @@ function transformStream(
     await writer.close();
   })();
 
-  return readable;
+  return readable.pipeThrough(new TextEncoderStream());
 }
 
 function transformSuspenseStream(
   promises: SuspensePromises,
   body: string,
-): ReadableStream<string> {
+): ReadableStream<Uint8Array> {
   const { readable, writable } = new TransformStream<string, string>();
 
   (async () => {
@@ -99,7 +99,7 @@ function transformSuspenseStream(
     await writer.close();
   })();
 
-  return readable;
+  return readable.pipeThrough(new TextEncoderStream());
 }
 
 function suspenseChunk(result: { id: number; content: string }): string {
