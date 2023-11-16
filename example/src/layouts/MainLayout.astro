@@ -19,9 +19,15 @@ export interface Props {
 
       {
         Astro.url.pathname !== "/" && (
-          <section>
+          <section class="flex justify-between">
             <a href="/" class="text-blue-600 hover:text-blue-800">
               Back to index
+            </a>
+            <a
+              href="https://github.com/charlie-hadden/astro-suspense"
+              class="text-blue-600 hover:text-blue-800"
+            >
+              GitHub
             </a>
           </section>
         )
