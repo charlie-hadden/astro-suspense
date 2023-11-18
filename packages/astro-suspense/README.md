@@ -23,6 +23,8 @@ import SlowComponent from "./SlowComponent.astro";
 ---
 
 <Suspense>
+  <p slot="fallback">Loading...</p>
+  <p slot="error">Something went wrong</p>
   <SlowComponent />
 </Suspense>
 ```
