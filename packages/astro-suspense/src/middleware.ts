@@ -36,6 +36,9 @@ export const onRequest = defineMiddleware(async (ctx, next) => {
       ...response,
       headers: {
         ...response.headers,
+        vary: [response.headers.get("vary"), "astro-suspense-transition"]
+          .filter(Boolean)
+          .join("\n"),
         "content-type": "text/astro-suspense-transition-stream",
       },
     });
@@ -43,7 +46,15 @@ export const onRequest = defineMiddleware(async (ctx, next) => {
 
   const stream = transformStream(ctx.locals.suspensePromises, response.body);
 
-  return new Response(stream, response);
+  return new Response(stream, {
+    ...response,
+    headers: {
+      ...response.headers,
+      vary: [response.headers.get("vary"), "astro-suspense-transition"]
+        .filter(Boolean)
+        .join("\n"),
+    },
+  });
 });
 
 function transformStream(
