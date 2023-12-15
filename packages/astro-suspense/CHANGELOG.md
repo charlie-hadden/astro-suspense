@@ -1,5 +1,11 @@
 # astro-suspense
 
+## 0.1.0
+
+### Minor Changes
+
+- ba4f1ff: Update dependencies (including astro peer dep version).
+
 ## 0.0.2
 
 ### Patch Changes
