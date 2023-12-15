@@ -1,5 +1,11 @@
 # astro-suspense
 
+## 0.1.1
+
+### Patch Changes
+
+- 6163b64: Fix issue with import.
+
 ## 0.1.0
 
 ### Minor Changes
