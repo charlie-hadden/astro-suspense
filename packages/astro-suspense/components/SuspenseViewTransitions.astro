@@ -13,7 +13,7 @@ export type Props = Parameters<typeof ViewTransitions>[0];
     runScripts,
     preloadStyleLinks,
     prepareForClientOnlyComponents,
-  } from "../src/astro-modifications.js";
+  } from "../dist/astro-modifications.js";
 
   let streamReader: ReadableStreamDefaultReader<string>;
   let suspenseStream: AsyncGenerator<string> | null = null;
