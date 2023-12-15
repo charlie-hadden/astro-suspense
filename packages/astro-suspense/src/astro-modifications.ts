@@ -77,10 +77,10 @@ export async function fetchHTML(
   | null
   | { html: string; redirected?: string; mediaType: DOMParserSupportedType }
   | {
-    streamReader: ReadableStreamDefaultReader<string>;
-    redirected?: string;
-    mediaType: "text/astro-suspense-transition-stream";
-  }
+      streamReader: ReadableStreamDefaultReader<string>;
+      redirected?: string;
+      mediaType: "text/astro-suspense-transition-stream";
+    }
 > {
   try {
     const res = await fetch(href, init);
@@ -177,7 +177,7 @@ export async function prepareForClientOnlyComponents(
     // @ts-ignore
     nextPage.contentWindow!.console = Object.keys(console).reduce(
       (acc: any, key) => {
-        acc[key] = () => { };
+        acc[key] = () => {};
         return acc;
       },
       {},
