@@ -68,16 +68,17 @@ export type Props = Parameters<typeof ViewTransitions>[0];
 
       const response = await fetchHTML(href, init);
 
-      if (response.mediaType == "text/astro-suspense-transition-stream") {
-        streamReader = response.streamReader;
-        suspenseStream = readSuspenseStream();
-      }
-
       // If there is a problem fetching the new page, just do an MPA navigation to it.
       if (response === null) {
         event.preventDefault();
         return;
       }
+
+      if (response.mediaType == "text/astro-suspense-transition-stream") {
+        streamReader = response.streamReader;
+        suspenseStream = readSuspenseStream();
+      }
+
       // if there was a redirection, show the final URL in the browser's address bar
       if (response.redirected) {
         event.to = new URL(response.redirected);
