@@ -1,5 +1,11 @@
 # astro-suspense
 
+## 0.1.2
+
+### Patch Changes
+
+- 0d2fdb0: Fix issue with errors from `fetchHTML`.
+
 ## 0.1.1
 
 ### Patch Changes
