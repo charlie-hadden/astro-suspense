@@ -1,6 +1,6 @@
 {
   "name": "astro-suspense",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "type": "module",
   "description": "Out of order streaming support for Astro.",
   "scripts": {
