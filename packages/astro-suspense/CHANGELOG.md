@@ -1,5 +1,11 @@
 # astro-suspense
 
+## 0.1.3
+
+### Patch Changes
+
+- 5596ab1: Avoid escaping template tags as they can be nested
+
 ## 0.1.2
 
 ### Patch Changes
