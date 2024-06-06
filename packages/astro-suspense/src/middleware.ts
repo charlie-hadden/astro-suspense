@@ -114,10 +114,5 @@ function transformSuspenseStream(
 }
 
 function suspenseChunk(result: { id: number; content: string }): string {
-  return `<template astro-suspense-id="${result.id}">${result.content.replace(
-    /<\/template>/g,
-    "\\x3c/template>",
-  )}</template><script astro-suspense-id="${
-    result.id
-  }">window.astroSuspenseLoad(${result.id})</script>`;
+  return `<template astro-suspense-id="${result.id}">${result.content}</template><script astro-suspense-id="${result.id}">window.astroSuspenseLoad(${result.id})</script>`;
 }
